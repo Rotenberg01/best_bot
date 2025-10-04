@@ -1,0 +1,370 @@
+# Створюю HTML для адмін панелі
+
+admin_html = '''
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адмін панель - Доктор Тихонська</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #E3F2FD;
+            --secondary-color: #BBDEFB;
+            --accent-color: #2196F3;
+            --text-color: #333;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            min-height: 100vh;
+        }
+        
+        .sidebar .nav-link {
+            color: var(--text-color);
+            padding: 12px 20px;
+            margin: 5px 0;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            background: var(--accent-color);
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .main-content {
+            padding: 20px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .btn-custom {
+            background: var(--accent-color);
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-custom:hover {
+            background: #1976D2;
+            transform: translateY(-2px);
+            color: white;
+        }
+        
+        .table-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .login-form {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Екран авторизації -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-form">
+            <div class="text-center mb-4">
+                <i class="fas fa-user-md fa-3x text-primary mb-3"></i>
+                <h3>Адмін панель</h3>
+                <p class="text-muted">Доктор Тихонська</p>
+            </div>
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label for="password" class="form-label">Пароль</label>
+                    <input type="password" class="form-control" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-custom w-100">
+                    <i class="fas fa-sign-in-alt me-2"></i>Увійти
+                </button>
+            </form>
+            <div id="loginError" class="alert alert-danger mt-3 hidden"></div>
+        </div>
+    </div>
+
+    <!-- Головний інтерфейс -->
+    <div id="mainInterface" class="hidden">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Бічна панель -->
+                <div class="col-md-2 sidebar p-0">
+                    <div class="p-3">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-user-md fa-2x text-primary"></i>
+                            <h5 class="mt-2">Адмін панель</h5>
+                        </div>
+                        <nav class="nav flex-column">
+                            <a class="nav-link active" href="#" data-section="dashboard">
+                                <i class="fas fa-chart-line me-2"></i>Дашборд
+                            </a>
+                            <a class="nav-link" href="#" data-section="appointments">
+                                <i class="fas fa-calendar-check me-2"></i>Записи
+                            </a>
+                            <a class="nav-link" href="#" data-section="users">
+                                <i class="fas fa-users me-2"></i>Користувачі
+                            </a>
+                            <a class="nav-link" href="#" data-section="subscriptions">
+                                <i class="fas fa-crown me-2"></i>Підписки
+                            </a>
+                            <a class="nav-link" href="#" data-section="broadcast">
+                                <i class="fas fa-bullhorn me-2"></i>Розсилка
+                            </a>
+                            <a class="nav-link" href="#" data-section="schedule">
+                                <i class="fas fa-clock me-2"></i>Графік
+                            </a>
+                        </nav>
+                        <hr>
+                        <button class="btn btn-outline-danger btn-sm w-100" onclick="logout()">
+                            <i class="fas fa-sign-out-alt me-2"></i>Вийти
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Основний контент -->
+                <div class="col-md-10 main-content">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2>
+                            <i class="fas fa-chart-line me-2 text-primary"></i>
+                            <span id="sectionTitle">Дашборд</span>
+                        </h2>
+                        <div class="text-muted">
+                            <i class="fas fa-calendar me-1"></i>
+                            <span id="currentDate"></span>
+                        </div>
+                    </div>
+
+                    <!-- Дашборд -->
+                    <div id="dashboardSection">
+                        <div class="row" id="statsCards">
+                            <!-- Статистичні карточки будуть додані через JS -->
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="table-container">
+                                    <h5><i class="fas fa-calendar-day me-2"></i>Записи на сьогодні</h5>
+                                    <div id="todayAppointments">
+                                        <div class="text-center text-muted py-3">
+                                            <i class="fas fa-spinner fa-spin fa-2x mb-2"></i>
+                                            <p>Завантаження...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="table-container">
+                                    <h5><i class="fas fa-chart-bar me-2"></i>Статистика місяця</h5>
+                                    <canvas id="monthlyChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Записи -->
+                    <div id="appointmentsSection" class="hidden">
+                        <div class="table-container">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5><i class="fas fa-calendar-check me-2"></i>Всі записи</h5>
+                                <button class="btn btn-custom" onclick="refreshAppointments()">
+                                    <i class="fas fa-sync me-1"></i>Оновити
+                                </button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Користувач</th>
+                                            <th>Тип</th>
+                                            <th>Місто</th>
+                                            <th>Дата</th>
+                                            <th>Час</th>
+                                            <th>Процедура</th>
+                                            <th>Сума</th>
+                                            <th>Оплата</th>
+                                            <th>Дії</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="appointmentsTable">
+                                        <tr>
+                                            <td colspan="9" class="text-center text-muted py-3">
+                                                <i class="fas fa-spinner fa-spin fa-2x mb-2"></i>
+                                                <p>Завантаження записів...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Користувачі -->
+                    <div id="usersSection" class="hidden">
+                        <div class="table-container">
+                            <h5><i class="fas fa-users me-2"></i>Користувачі бота</h5>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Ім'я</th>
+                                            <th>Username</th>
+                                            <th>Дата реєстрації</th>
+                                            <th>Статус</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="usersTable">
+                                        <tr>
+                                            <td colspan="5" class="text-center text-muted py-3">
+                                                <i class="fas fa-spinner fa-spin fa-2x mb-2"></i>
+                                                <p>Завантаження користувачів...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Підписки -->
+                    <div id="subscriptionsSection" class="hidden">
+                        <div class="table-container">
+                            <h5><i class="fas fa-crown me-2"></i>Підписки Beauty Insider</h5>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Користувач</th>
+                                            <th>Початок</th>
+                                            <th>Закінчення</th>
+                                            <th>Статус</th>
+                                            <th>Дні залишилось</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="subscriptionsTable">
+                                        <tr>
+                                            <td colspan="5" class="text-center text-muted py-3">
+                                                <i class="fas fa-spinner fa-spin fa-2x mb-2"></i>
+                                                <p>Завантаження підписок...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Розсилка -->
+                    <div id="broadcastSection" class="hidden">
+                        <div class="table-container">
+                            <h5><i class="fas fa-bullhorn me-2"></i>Розсилка повідомлень</h5>
+                            <form id="broadcastForm">
+                                <div class="mb-3">
+                                    <label for="broadcastMessage" class="form-label">Текст повідомлення</label>
+                                    <textarea class="form-control" id="broadcastMessage" rows="5" 
+                                             placeholder="Введіть текст повідомлення для розсилки..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-custom">
+                                    <i class="fas fa-paper-plane me-2"></i>Відправити всім користувачам
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Графік роботи -->
+                    <div id="scheduleSection" class="hidden">
+                        <div class="table-container">
+                            <h5><i class="fas fa-clock me-2"></i>Управління графіком</h5>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="scheduleDate" class="form-label">Дата</label>
+                                    <input type="date" class="form-control" id="scheduleDate">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="scheduleCity" class="form-label">Місто</label>
+                                    <select class="form-select" id="scheduleCity">
+                                        <option value="Дніпро">Дніпро</option>
+                                        <option value="Запоріжжя">Запоріжжя</option>
+                                        <option value="Онлайн">Онлайн</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 d-flex align-items-end">
+                                    <button class="btn btn-custom" onclick="loadSchedule()">
+                                        <i class="fas fa-search me-1"></i>Показати графік
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="scheduleGrid">
+                                <p class="text-muted text-center">Оберіть дату та місто для перегляду графіку</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
+'''
+
+# Зберігаємо файл
+with open('admin_index.html', 'w', encoding='utf-8') as f:
+    f.write(admin_html)
+
+print("✅ admin/index.html створено з сучасним дизайном")

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бот Доктора Тихонської - Косметологія</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bot-container">
+        <!-- Header -->
+        <header class="bot-header">
+            <div class="header-info">
+                <div class="doctor-avatar">👩‍⚕️</div>
+                <div class="header-text">
+                    <h1>Доктор Тихонська</h1>
+                    <p>Лікар-косметолог</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Menu Screen -->
+        <div id="main-menu" class="screen active">
+            <div class="welcome-section">
+                <h2>🌸 Вітаю в моєму боті!</h2>
+                <p>Я допоможу вам записатися на консультацію або процедуру, підписатися на приватний канал та багато іншого.</p>
+            </div>
+            
+            <div class="menu-buttons">
+                <button class="menu-btn" onclick="showScreen('intro-info')">
+                    <span class="btn-icon">ℹ️</span>
+                    <span class="btn-text">Вступна інформація</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+                
+                <button class="menu-btn" onclick="showScreen('consultation-booking')">
+                    <span class="btn-icon">📅</span>
+                    <span class="btn-text">Запис на консультацію</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+                
+                <button class="menu-btn" onclick="showScreen('procedure-booking')">
+                    <span class="btn-icon">💆‍♀️</span>
+                    <span class="btn-text">Запис на процедури</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+                
+                <button class="menu-btn" onclick="showScreen('subscription')">
+                    <span class="btn-icon">⭐</span>
+                    <span class="btn-text">Підписка "Beauty Insider"</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+                
+                <button class="menu-btn" onclick="showScreen('community')">
+                    <span class="btn-icon">👥</span>
+                    <span class="btn-text">Спільнота косметології</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+                
+                <button class="menu-btn" onclick="showScreen('contacts')">
+                    <span class="btn-icon">📞</span>
+                    <span class="btn-text">Зв'язок</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+                
+                <button class="menu-btn" onclick="showScreen('locations')">
+                    <span class="btn-icon">📍</span>
+                    <span class="btn-text">Наші локації</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Intro Info Screen -->
+        <div id="intro-info" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('main-menu')">← Назад</button>
+                <h2>ℹ️ Про доктора</h2>
+            </div>
+            <div class="info-content">
+                <div class="doctor-profile">
+                    <div class="profile-image">👩‍⚕️</div>
+                    <h3>Доктор Тихонська</h3>
+                    <p class="title">Лікар-косметолог</p>
+                </div>
+                <div class="info-text">
+                    <p>🎓 Досвід роботи більше 8 років</p>
+                    <p>🏆 Сертифікований спеціаліст з косметології</p>
+                    <p>💎 Експерт з ін'єкційних методик</p>
+                    <p>🌟 Більше 2000+ задоволених клієнтів</p>
+                    <p>📚 Постійно підвищую кваліфікацію</p>
+                </div>
+                <div class="specializations">
+                    <h4>🔬 Спеціалізації:</h4>
+                    <ul>
+                        <li>Контурна пластика</li>
+                        <li>Ботулінотерапія</li>
+                        <li>Біоревіталізація</li>
+                        <li>Мезотерапія</li>
+                        <li>Хімічні пілінги</li>
+                        <li>Апаратна косметологія</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Consultation Booking Screen -->
+        <div id="consultation-booking" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('main-menu')">← Назад</button>
+                <h2>📅 Запис на консультацію</h2>
+            </div>
+            <div class="booking-content">
+                <div class="booking-step" id="consultation-type">
+                    <h3>Оберіть тип консультації:</h3>
+                    <div class="option-buttons">
+                        <button class="option-btn" onclick="selectConsultationType('first')">
+                            <span>🆕 Перша консультація</span>
+                            <span class="price">500 грн</span>
+                        </button>
+                        <button class="option-btn" onclick="selectConsultationType('repeat')">
+                            <span>🔄 Повторна консультація</span>
+                            <span class="price">300 грн</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="booking-step hidden" id="consultation-city">
+                    <h3>Оберіть місто:</h3>
+                    <div class="option-buttons">
+                        <button class="option-btn" onclick="selectCity('online')">
+                            <span>💻 Онлайн</span>
+                        </button>
+                        <button class="option-btn" onclick="selectCity('dnipro')">
+                            <span>🏢 Дніпро</span>
+                        </button>
+                        <button class="option-btn" onclick="selectCity('zaporizhzhya')">
+                            <span>🏢 Запоріжжя</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="booking-step hidden" id="consultation-date">
+                    <h3>Оберіть дату:</h3>
+                    <div class="calendar-container">
+                        <div class="calendar-header">
+                            <button class="calendar-nav" onclick="previousMonth()">‹</button>
+                            <span class="calendar-month">Жовтень 2025</span>
+                            <button class="calendar-nav" onclick="nextMonth()">›</button>
+                        </div>
+                        <div class="calendar-grid" id="calendar-grid">
+                            <!-- Calendar will be generated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-step hidden" id="consultation-time">
+                    <h3>Оберіть час:</h3>
+                    <div class="time-slots" id="time-slots">
+                        <!-- Time slots will be generated by JS -->
+                    </div>
+                </div>
+
+                <div class="booking-step hidden" id="consultation-payment">
+                    <h3>Спосіб оплати:</h3>
+                    <div class="payment-options">
+                        <button class="payment-btn" onclick="selectPayment('card')">
+                            <span class="payment-icon">💳</span>
+                            <span class="payment-text">Оплатити картою</span>
+                            <span class="payment-service">Portmone</span>
+                        </button>
+                        <button class="payment-btn" onclick="selectPayment('cash')" id="cash-payment">
+                            <span class="payment-icon">💵</span>
+                            <span class="payment-text">Готівкою при прийомі</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="booking-summary hidden" id="booking-summary">
+                    <h3>✅ Підтвердження запису</h3>
+                    <div class="summary-details" id="summary-details">
+                        <!-- Booking details will be shown here -->
+                    </div>
+                    <button class="confirm-btn" onclick="confirmBooking()">Підтвердити запис</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Procedure Booking Screen -->
+        <div id="procedure-booking" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('main-menu')">← Назад</button>
+                <h2>💆‍♀️ Запис на процедури</h2>
+            </div>
+            <div class="booking-content">
+                <div class="booking-step" id="procedure-city">
+                    <h3>Оберіть місто:</h3>
+                    <div class="option-buttons">
+                        <button class="option-btn" onclick="selectProcedureCity('dnipro')">
+                            <span>🏢 Дніпро</span>
+                        </button>
+                        <button class="option-btn" onclick="selectProcedureCity('zaporizhzhya')">
+                            <span>🏢 Запоріжжя</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="booking-step hidden" id="procedure-selection">
+                    <h3>Оберіть процедуру:</h3>
+                    <div class="procedures-list" id="procedures-list">
+                        <!-- Procedures will be loaded by JS -->
+                    </div>
+                    <div class="pagination">
+                        <button class="page-btn" onclick="changePage(1)">1-10</button>
+                        <button class="page-btn" onclick="changePage(2)">11-20</button>
+                    </div>
+                </div>
+
+                <div class="booking-step hidden" id="procedure-date">
+                    <h3>Оберіть дату:</h3>
+                    <div class="calendar-container">
+                        <div class="calendar-header">
+                            <button class="calendar-nav" onclick="previousMonth()">‹</button>
+                            <span class="calendar-month">Жовтень 2025</span>
+                            <button class="calendar-nav" onclick="nextMonth()">›</button>
+                        </div>
+                        <div class="calendar-grid" id="procedure-calendar-grid">
+                            <!-- Calendar will be generated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-step hidden" id="procedure-time">
+                    <h3>Оберіть час:</h3>
+                    <div class="time-slots" id="procedure-time-slots">
+                        <!-- Time slots will be generated by JS -->
+                    </div>
+                </div>
+
+                <div class="booking-step hidden" id="procedure-payment">
+                    <h3>Спосіб оплати:</h3>
+                    <div class="payment-options">
+                        <button class="payment-btn" onclick="selectProcedurePayment('card')">
+                            <span class="payment-icon">💳</span>
+                            <span class="payment-text">Оплатити картою</span>
+                            <span class="payment-service">Portmone</span>
+                        </button>
+                        <button class="payment-btn" onclick="selectProcedurePayment('cash')">
+                            <span class="payment-icon">💵</span>
+                            <span class="payment-text">Готівкою при прийомі</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subscription Screen -->
+        <div id="subscription" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('main-menu')">← Назад</button>
+                <h2>⭐ Підписка "Beauty Insider"</h2>
+            </div>
+            <div class="subscription-content">
+                <div class="subscription-info">
+                    <div class="sub-header">
+                        <span class="sub-icon">💎</span>
+                        <h3>Beauty Insider</h3>
+                        <span class="sub-badge">ПРЕМІУМ</span>
+                    </div>
+                    <div class="sub-benefits">
+                        <h4>🎁 Що ви отримаєте:</h4>
+                        <ul>
+                            <li>🔐 Доступ до приватного каналу</li>
+                            <li>📚 Ексклюзивні поради по догляду</li>
+                            <li>💡 Секрети краси від професіонала</li>
+                            <li>🎥 Відеоуроки та лайфхаки</li>
+                            <li>💬 Персональні консультації</li>
+                            <li>🎯 Індивідуальні рекомендації</li>
+                        </ul>
+                    </div>
+                    <div class="sub-pricing">
+                        <div class="price-box">
+                            <span class="price">300 грн</span>
+                            <span class="period">/ місяць (30-31 день)</span>
+                        </div>
+                    </div>
+                    <div class="subscription-actions">
+                        <button class="subscribe-btn" onclick="subscribeToPremium()">
+                            <span>💳 Оплатити картою</span>
+                            <span class="payment-service">Portmone</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Community Screen -->
+        <div id="community" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('main-menu')">← Назад</button>
+                <h2>👥 Спільнота косметології</h2>
+            </div>
+            <div class="community-content">
+                <div class="community-info">
+                    <div class="community-header">
+                        <span class="community-icon">🌸</span>
+                        <h3>Канал доктора Тихонської</h3>
+                    </div>
+                    <div class="community-description">
+                        <p>🔔 Приєднуйтесь до нашого телеграм каналу для отримання:</p>
+                        <ul>
+                            <li>📰 Останніх новин косметології</li>
+                            <li>💡 Корисних порад по догляду</li>
+                            <li>📸 Результатів процедур</li>
+                            <li>🎉 Акцій та знижок</li>
+                            <li>📅 Анонсів нових послуг</li>
+                        </ul>
+                    </div>
+                    <div class="community-action">
+                        <button class="join-btn" onclick="joinCommunity()">
+                            <span class="btn-icon">📱</span>
+                            <span>Приєднатися до каналу</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contacts Screen -->
+        <div id="contacts" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('main-menu')">← Назад</button>
+                <h2>📞 Зв'язок</h2>
+            </div>
+            <div class="contacts-content">
+                <div class="contact-methods">
+                    <button class="contact-btn" onclick="openContact('telegram')">
+                        <span class="contact-icon">💬</span>
+                        <div class="contact-info">
+                            <span class="contact-name">Telegram</span>
+                            <span class="contact-handle">@tykhonskaa</span>
+                        </div>
+                        <span class="contact-arrow">→</span>
+                    </button>
+
+                    <button class="contact-btn" onclick="openContact('instagram')">
+                        <span class="contact-icon">📷</span>
+                        <div class="contact-info">
+                            <span class="contact-name">Instagram</span>
+                            <span class="contact-handle">dr.tykhonskaa</span>
+                        </div>
+                        <span class="contact-arrow">→</span>
+                    </button>
+
+                    <button class="contact-btn" onclick="openContact('channel')">
+                        <span class="contact-icon">📺</span>
+                        <div class="contact-info">
+                            <span class="contact-name">Telegram канал</span>
+                            <span class="contact-handle">dr_tykhonska</span>
+                        </div>
+                        <span class="contact-arrow">→</span>
+                    </button>
+
+                    <button class="contact-btn" onclick="openContact('tiktok')">
+                        <span class="contact-icon">🎵</span>
+                        <div class="contact-info">
+                            <span class="contact-name">TikTok</span>
+                            <span class="contact-handle">@dr.tykhonska</span>
+                        </div>
+                        <span class="contact-arrow">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Locations Screen -->
+        <div id="locations" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('main-menu')">← Назад</button>
+                <h2>📍 Наші локації</h2>
+            </div>
+            <div class="locations-content">
+                <div class="location-card">
+                    <div class="location-header">
+                        <span class="location-icon">🏢</span>
+                        <h3>Дніпро</h3>
+                    </div>
+                    <div class="location-address">
+                        <p>📍 Проспект Олександра Поля, 22</p>
+                    </div>
+                    <button class="map-btn" onclick="openMap('dnipro')">
+                        <span class="map-icon">🗺️</span>
+                        <span>Відкрити в Google Maps</span>
+                    </button>
+                </div>
+
+                <div class="location-card">
+                    <div class="location-header">
+                        <span class="location-icon">🏢</span>
+                        <h3>Запоріжжя</h3>
+                    </div>
+                    <div class="location-address">
+                        <p>📍 Перша ливарна, 27а</p>
+                    </div>
+                    <button class="map-btn" onclick="openMap('zaporizhzhya')">
+                        <span class="map-icon">🗺️</span>
+                        <span>Відкрити в Google Maps</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Panel Link (for demo) -->
+        <div class="admin-link">
+            <button class="admin-btn" onclick="showAdminPanel()">
+                <span>⚙️ Адмін панель</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

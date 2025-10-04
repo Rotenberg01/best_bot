@@ -1,0 +1,66 @@
+{
+    "name": "dr-tykhonska-bot",
+    "version": "1.0.0",
+    "description": "Telegram bot for Dr. Tykhonska cosmetology practice with admin panel",
+    "main": "bot.js",
+    "scripts": {
+        "start": "node bot.js",
+        "dev": "nodemon bot.js",
+        "admin": "node admin/server.js",
+        "setup": "node database_init.js",
+        "backup": "./backup.sh",
+        "test": "echo \"No tests specified\" && exit 0",
+        "install-all": "npm install && npm run setup"
+    },
+    "dependencies": {
+        "node-telegram-bot-api": "^0.64.0",
+        "express": "^4.18.2",
+        "sqlite3": "^5.1.6",
+        "body-parser": "^1.20.2",
+        "cors": "^2.8.5",
+        "node-cron": "^3.0.3",
+        "moment": "^2.29.4",
+        "axios": "^1.6.0",
+        "dotenv": "^16.3.1",
+        "multer": "^1.4.5-lts.1",
+        "path": "^0.12.7",
+        "fs-extra": "^11.1.1",
+        "helmet": "^7.1.0",
+        "bcrypt": "^5.1.1",
+        "jsonwebtoken": "^9.0.2",
+        "uuid": "^9.0.1",
+        "validator": "^13.11.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1",
+        "eslint": "^8.56.0"
+    },
+    "engines": {
+        "node": ">=16.0.0",
+        "npm": ">=8.0.0"
+    },
+    "keywords": [
+        "telegram",
+        "bot",
+        "cosmetology",
+        "ukraine",
+        "booking",
+        "admin-panel",
+        "portmone",
+        "sqlite"
+    ],
+    "author": {
+        "name": "Dr. Tykhonska",
+        "email": "dr.tykhonska@gmail.com",
+        "url": "https://dr-tykhonska.com.ua"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dr-tykhonska/telegram-bot"
+    },
+    "bugs": {
+        "url": "https://github.com/dr-tykhonska/telegram-bot/issues"
+    },
+    "homepage": "https://dr-tykhonska.com.ua"
+}
